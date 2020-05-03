@@ -5,6 +5,11 @@
     <title>Hyper news</title>
 </head>
 <body>
+    <form action="/news/" method="GET">
+        <p>Search:</p>
+        <input type="text" name="q">
+        <button type="submit">Search</button>
+    </form>
     <h2>Hyper news</h2>
     {% for date, group_news in all_news.items %}
         <h4>{{ date }}</h4>

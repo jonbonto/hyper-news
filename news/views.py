@@ -18,9 +18,12 @@ def get_news(request, id):
             raise Http404("link doesn't exist")
 
 
-def index(request):
+def index(request, *args, **kwargs):
     with open(settings.NEWS_JSON_PATH) as json_file:
         all_news = json.load(json_file)
+        q = request.GET.get('q')
+        if q:
+            all_news = filter(lambda item: q in item['title'], all_news)
         news_grouped = {k: list(v) for k, v in groupby(sorted(all_news, key= lambda item: item["created"], reverse=True), key=lambda item: item["created"][:10])}
         return render(request, 'news/index.html', context={'all_news': news_grouped})
 
