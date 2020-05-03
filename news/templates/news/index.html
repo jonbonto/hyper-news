@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Hyper news</title>
 </head>
 <body>
-$END$
+    <h2>Hyper news</h2>
+    {% for date, group_news in all_news.items %}
+        <h4>{{ date }}</h4>
+        <ul>
+        {% for news in group_news %}
+            <li>
+                <a href="/news/{{ news.link }}/">{{ news.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="/news/create/" target="_blank">Create News</a>
 </body>
 </html>
